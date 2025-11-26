@@ -1,0 +1,126 @@
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+build/
+dist/
+.eggs/
+*.egg-info/
+pip-wheel-metadata/
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+pytest_cache/
+hypothesis/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+# pyenv
+.python-version
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+# Pyre type checker
+.pyre/
+# pytype static type analyzer
+.pytype/
+# Cython debug symbols
+cython_debug/
+# VS Code settings
+.vscode/
+# Conda environment
+.conda/
+# Fuzzy search data
+fuzzy/
+# macOS
+.DS_Store
+# Thumbnails
+._*
+# Icon?
+Icon?
+# Trash
+.Trashes
+# ehthumbs.db
+ehthumbs.db
+# Thumbs.db
+Thumbs.db
+# JetBrains IDEs
+.idea/
+# Sphinx documentation
+docs/_build/
+# Virtual environments
+venv/
+env/
+ENV/
+.env/
+.env.local/
+.env.*.local/
+# Jupyter Notebook virtual environment
+.ipynb_env/
+# Spyder project settings
+.spyderproject/
+.spyproject/
+# Rope project settings
+.ropeproject/
+# PyCharm
+.idea/
+*.iml
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+# Eclipse
+.project
+.pydevproject
+# Vim
+*.swp
+*.swo
+# Emacs
+
+*~
+# Backup files
+*.bak
+*.tmp
+*.old
+# Logs
+*.log
+logs/
+*.log.*
+# Temporary files
+tmp/
+temp/
+# Database files
+*.sqlite3
+*.db
+*.db-journal
+# Coverage reports 
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+pytest_cache/
+hypothesis/
+.pytest_cache/
+# Sphinx documentation
+docs/_build/
+# C extensions
+cython_debug/
+# Distribution / packaging
+build/
+dist/
+.eggs/
