@@ -1,22 +1,25 @@
-# %% 
 import pandas as pd
 import numpy as np
 import skfuzzy as fuzz
 import sympy as sp
 from skfuzzy import control as ctrl
 
+
 def select_higher_membership(linguistic_variable, input_value):
     p = 0
     label_max = None
-    input_value = np.clip(input_value, linguistic_variable.universe.min(), linguistic_variable.universe.max())
+    input_value = np.clip(input_value, linguistic_variable.universe.min(
+    ), linguistic_variable.universe.max())
     for label, set in linguistic_variable.terms.items():
-        pertinence = fuzz.interp_membership(linguistic_variable.universe, set.mf, input_value)
+        pertinence = fuzz.interp_membership(
+            linguistic_variable.universe, set.mf, input_value)
         if pertinence > p:
-            label_max = label 
-            p = pertinence 
+            label_max = label
+            p = pertinence
     return label_max, p
 
-def create_rule(list_values, list_variables, n_outputs = 1):
+
+def create_rule(list_values, list_variables, n_outputs=1):
     rule_p = 1
     list_antecedents = []
     list_consequents = []
@@ -25,16 +28,19 @@ def create_rule(list_values, list_variables, n_outputs = 1):
         rule_p *= p
         list_antecedents.append(list_variables[i][label])
     for k in range(n_outputs):
-        label, p, select_higher_membership(list_variables[i+k+1], list_values[i+k+1])
+        label, p = select_higher_membership(
+            list_variables[i+k+1], list_values[i+k+1])
         list_consequents.append(list_variables[i+k+1][label])
         rule_p *= p
     return [list_antecedents, list_consequents, rule_p]
+
 
 def create_rules(df, list_variables, n_outputs=1):
     rule_list = []
     for i in range(len(df)):
         rule_list.append(create_rule(df.iloc[i], list_variables, n_outputs))
     return rule_list
+
 
 def filter_rules(list):
     list_filtered = []
@@ -48,6 +54,7 @@ def filter_rules(list):
                         list_filtered[j] = list[i]
     return list_filtered
 
+
 def create_fuzzy_rules(rules):
     list_rules = []
     for rule in rules:
@@ -60,12 +67,23 @@ def create_fuzzy_rules(rules):
         list_rules.append(ctrl.Rule(combined_antecedent, combined_consequent))
     return list_rules
 
-def create_fuzzy_system(df, list_variables, n_outputs=1):
-    rules = create_rules(df, list_variables, n_outputs)
-    rules = filter_rules(rules)
-    rules = create_fuzzy_rules(rules)
-    return ctrl.ControlSystem(rules)
 
-
-
-# %%
+def create_fuzzy_system(df, list_variables, operacao_intersecao, operacao_implicacao, n_outputs=1):
+    """
+    Cria um sistema fuzzy usando o método de Wang & Mendel.
+    
+    Aplica filtragem de regras conflitantes, mantendo apenas a regra com maior grau de pertinência.
+    Isso reduz drasticamente o número de regras e melhora a performance.
+    """
+    # Primeiro, cria todas as regras candidatas usando o método original
+    raw_rules = create_rules(df, list_variables, n_outputs)
+    
+    # Filtra regras conflitantes (Wang & Mendel: mantém a de maior grau)
+    filtered_rules = filter_rules(raw_rules)
+    
+    #print(f"Regras geradas: {len(raw_rules)} → Após filtragem: {len(filtered_rules)}")
+    
+    # Converte para formato do skfuzzy
+    fuzzy_rules = create_fuzzy_rules(filtered_rules)
+    
+    return ctrl.ControlSystem(fuzzy_rules)
