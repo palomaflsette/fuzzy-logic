@@ -14,13 +14,13 @@ fuzzy_logic/
 │   ├── data/                         # Dataset files (stock prices, temperature)
 │   ├── notebooks/                    # Jupyter notebooks with implementations
 │   ├── src/                          # Core fuzzy logic utilities and algorithms
-│   └── results_hyperparameter_search.csv
+│   └── requirements.txt
+│  
 │
 ├── 2nd-exercise_fuzzy-control/       # Fuzzy control systems
 │   ├── data/                         # Control system datasets
 │   └── simulink/                     # MATLAB/Simulink models
 │
-├── requirements.txt
 └── README.md
 ```
 
@@ -133,6 +133,7 @@ The `1st-exercise_rule-generation/notebooks/` directory contains detailed implem
 - **examples/**: Reference implementations for different datasets
 
 Each notebook includes:
+
 - Step-by-step model construction
 - Performance evaluation metrics
 - Visualization of predictions and residuals
