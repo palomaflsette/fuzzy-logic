@@ -75,15 +75,11 @@ def create_fuzzy_system(df, list_variables, operacao_intersecao, operacao_implic
     Aplica filtragem de regras conflitantes, mantendo apenas a regra com maior grau de pertinência.
     Isso reduz drasticamente o número de regras e melhora a performance.
     """
-    # Primeiro, cria todas as regras candidatas usando o método original
     raw_rules = create_rules(df, list_variables, n_outputs)
     
-    # Filtra regras conflitantes (Wang & Mendel: mantém a de maior grau)
     filtered_rules = filter_rules(raw_rules)
     
-    #print(f"Regras geradas: {len(raw_rules)} → Após filtragem: {len(filtered_rules)}")
     
-    # Converte para formato do skfuzzy
     fuzzy_rules = create_fuzzy_rules(filtered_rules)
     
     return ctrl.ControlSystem(fuzzy_rules)
