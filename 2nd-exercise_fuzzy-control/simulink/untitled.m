@@ -1,0 +1,1 @@
+cd 'G:\My Drive\Engenharia\LOGICA_FUZZY\fuzzy_logic\2nd-exercise_fuzzy-control\simulink'
